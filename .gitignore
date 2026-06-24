@@ -1,24 +1,70 @@
-# Compiled class file
+# =========================================================================
+# Proyecto J.A.R.V.I.S. (IntelliJ + Java + Python)
+# =========================================================================
+
+# --- Compilación y Salidas de Java / Kotlin (JVM) ---
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
-*.nar
 *.ear
-*.zip
-*.tar.gz
-*.rar
+/out/
+/bin/
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# --- Gestor de Dependencias: Gradle ---
+.gradle/
+/build/
+/*-boot.jar
+
+# Conservar el wrapper de Gradle para que otros puedan compilar el proyecto sin instalar Gradle
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# --- Archivos de Configuración de IntelliJ IDEA ---
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Excepciones de IntelliJ: Sí queremos subir la configuración de estilos de código si existiera
+!.idea/codeStyles/
+
+# --- Entornos Virtuales y Caché de Python (Para componentes de IA) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.htmlcov/
+flake8.txt
+/venv/
+/env/
+/.venv/
+/ENV/
+
+# --- Archivos del Sistema Operativo ---
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+desktop.ini
+
+# --- CRÍTICO: Secretos, Credenciales y Variables de Entorno ---
+# Jamás subir tokens de APIs (Gemini, OpenAI, ElevenLabs, Picovoice, etc.)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Archivos de propiedades locales de la JVM
+secrets.properties
+local.properties
+credentials.json
+
+# Llaves criptográficas y certificados de seguridad
+*.pem
+*.key
+*.pub
+*.p12
