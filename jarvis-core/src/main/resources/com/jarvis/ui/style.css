@@ -1,0 +1,62 @@
+.hud-main-container {
+    -fx-background-color: rgba(6, 11, 22, 0.85);
+    -fx-background-radius: 15;
+    -fx-border-color: #00e5ff;
+    -fx-border-width: 2;
+    -fx-border-radius: 15;
+}
+
+.hud-panel {
+    -fx-background-color: rgba(11, 19, 43, 0.6);
+    -fx-border-color: rgba(0, 229, 255, 0.3);
+    -fx-border-width: 1;
+    -fx-padding: 15;
+}
+
+.hud-header {
+    -fx-text-fill: #00e5ff;
+    -fx-font-family: 'Courier New';
+    -fx-font-size: 14pt;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+}
+
+.hud-textarea {
+    -fx-control-inner-background: #020617;
+    -fx-text-fill: #38bdf8;
+    -fx-font-family: 'Courier New';
+    -fx-font-size: 11pt;
+}
+
+.hud-textfield {
+    -fx-background-color: #020617;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #00e5ff;
+}
+
+.hud-button {
+    -fx-background-color: #00e5ff;
+    -fx-text-fill: #060b16;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.arc-externo {
+    -fx-fill: transparent;
+    -fx-stroke: #00e5ff;
+    -fx-stroke-width: 3;
+    -fx-stroke-dash-array: 20, 15;
+}
+
+.arc-interno {
+    -fx-fill: transparent;
+    -fx-stroke: #38bdf8;
+    -fx-stroke-width: 2;
+    -fx-stroke-dash-array: 10, 8;
+}
+
+.arc-nucleo {
+    -fx-fill: rgba(0, 229, 255, 0.15);
+    -fx-stroke: #00e5ff;
+    -fx-stroke-width: 1;
+}

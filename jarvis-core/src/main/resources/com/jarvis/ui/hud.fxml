@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jarvis.ui.HudController"
+            prefHeight="600.0" prefWidth="1000.0"
+            stylesheets="@style.css" styleClass="hud-main-container">
+
+    <VBox layoutX="20.0" layoutY="20.0" prefWidth="450.0" prefHeight="560.0" styleClass="hud-panel">
+        <Label text="SYSTEM DIAGNOSTICS" styleClass="hud-header"/>
+        <TextArea fx:id="txtConsola" prefHeight="480.0" editable="false" styleClass="hud-textarea" wrapText="true"/>
+        <HBox spacing="10.0" style="-fx-padding: 10 0 0 0;">
+            <TextField fx:id="txtEntrada" onAction="#procesarEntradaManual" prefWidth="350.0" styleClass="hud-textfield" promptText="Escribe un comando..." />
+            <Button text="SEND" onAction="#procesarEntradaManual" prefWidth="80.0" styleClass="hud-button"/>
+        </HBox>
+    </VBox>
+
+    <StackPane layoutX="550.0" layoutY="150.0" prefWidth="350.0" prefHeight="350.0">
+        <Circle radius="120.0" styleClass="arc-externo" />
+        <Circle radius="95.0" styleClass="arc-interno" />
+        <Circle radius="60.0" styleClass="arc-nucleo" />
+        <Label text="J.A.R.V.I.S." style="-fx-text-fill: #ffffff; -fx-font-family: 'Courier New'; -fx-font-weight: bold; -fx-font-size: 14pt;" />
+    </StackPane>
+
+</AnchorPane>
