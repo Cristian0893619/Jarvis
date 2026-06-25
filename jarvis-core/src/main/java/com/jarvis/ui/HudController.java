@@ -18,12 +18,12 @@ public class HudController {
 
     @FXML
     public void initialize() {
-        Dotenv dotenv = Dotenv.configure().directory("./").load();
-        this.iaService = new IaService(dotenv);
+        // Dotenv ya no es estrictamente necesario para la API Key, pero lo mantenemos para estructura
+        this.iaService = new IaService(null);
         this.systemService = new SystemService();
 
-        txtConsola.appendText("[SYSTEM] Subsistemas inicializados.\n");
-        txtConsola.appendText("[SYSTEM] Interfaz de control táctica en línea...\n");
+        txtConsola.appendText("[SYSTEM] Nucleo local Phi-3 conectado.\n");
+        txtConsola.appendText("[SYSTEM] J.A.R.V.I.S. listo, Cristian.\n");
     }
 
     @FXML
@@ -36,42 +36,40 @@ public class HudController {
 
         String peticionMinusculas = peticion.toLowerCase();
 
-        // =================================================================
-        // 1. INTERCEPCIÓN LOCAL (Velocidad Ultrarrápida - Bypass de IA)
-        // =================================================================
-        if (peticionMinusculas.contains("reproduce música") || peticionMinusculas.contains("abre spotify")) {
-            txtConsola.appendText("[RODOLFO]: Abriendo reproductor multimedia inmediatamente, señor.\n");
-            systemService.ejecutarComandoNativo("open -a Spotify"); // Comando nativo para Mac
-            return; // Salimos de la función para NO usar la IA y ahorrar tiempo
-        }
-        else if (peticionMinusculas.contains("abre el navegador") || peticionMinusculas.contains("abre safari")) {
-            txtConsola.appendText("[RODOLFO]: Iniciando enlace web...\n");
-            systemService.ejecutarComandoNativo("open -a Safari");
-            return;
-        }
-        else if (peticionMinusculas.contains("abre youtube")) {
-            txtConsola.appendText("[RODOLFO]: Abriendo YouTube...\n");
-            systemService.ejecutarComandoNativo("open https://www.youtube.com");
+        // 1. INTERCEPCIÓN LOCAL (Ejecución instantánea)
+        if (procesarComandosLocales(peticionMinusculas)) {
             return;
         }
 
-        // =================================================================
-        // 2. PROCESAMIENTO COGNITIVO (Llamada a Gemini para cosas complejas)
-        // =================================================================
+        // 2. PROCESAMIENTO COGNITIVO (Phi-3 local)
         new Thread(() -> {
             String respuesta = iaService.enviarConsulta(peticion);
 
             Platform.runLater(() -> {
-                String respuestaLimpia = respuesta.trim();
-
-                if (respuestaLimpia.startsWith("CMD:")) {
-                    String comandoNativo = respuestaLimpia.replace("CMD:", "").trim();
-                    txtConsola.appendText("[RODOLFO]: Ejecutando protocolo -> " + comandoNativo + "\n");
-                    systemService.ejecutarComandoNativo(comandoNativo);
+                if (respuesta.startsWith("CMD:")) {
+                    String comando = respuesta.replace("CMD:", "").trim();
+                    txtConsola.appendText("[RODOLFO]: Entendido. Ejecutando: " + comando + "\n");
+                    systemService.ejecutarComandoNativo(comando);
                 } else {
-                    txtConsola.appendText("[RODOLFO]: " + respuestaLimpia + "\n");
+                    txtConsola.appendText("[RODOLFO]: " + respuesta.trim() + "\n");
                 }
             });
         }).start();
+    }
+
+    private boolean procesarComandosLocales(String input) {
+        if (input.contains("spotify") || input.contains("música")) {
+            if (input.contains("reproduce") || input.contains("play")) {
+                systemService.ejecutarComandoNativo("osascript -e 'tell application \"Spotify\" to play'");
+                txtConsola.appendText("[RODOLFO]: Música activada.\n");
+                return true;
+            }
+            if (input.contains("pausa")) {
+                systemService.ejecutarComandoNativo("osascript -e 'tell application \"Spotify\" to pause'");
+                txtConsola.appendText("[RODOLFO]: Pausado.\n");
+                return true;
+            }
+        }
+        return false;
     }
 }
